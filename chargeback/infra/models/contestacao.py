@@ -5,15 +5,15 @@ from chargeback.chargeback.domain.constantes import (
     TIPO_CONTESTACAO,
     EnumStatusContestacao,
 )
-from chargeback.chargeback.infra.persistence.models.cliente import Cliente
+from chargeback.chargeback.infra.models.cliente import Cliente
 
 
 class Contestacao(models.Model):
     tipo = models.SmallIntegerField(
         choices=[TIPO_CONTESTACAO],
     )
-    id_transacao = models.CharField(
-        verbose_name="ID da transação",
+    token_transacao = models.CharField(
+        verbose_name="Token da transação",
         max_length=255,
     )
     status = models.SmallIntegerField(
@@ -24,6 +24,16 @@ class Contestacao(models.Model):
     cliente = models.ForeignKey(
         Cliente,
         on_delete=models.CASCADE,
+    )
+    produto = models.CharField(
+        verbose_name="Produto",
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+    bandeira = models.CharField(
+        verbose_name="Bandeira do cartão",
+        max_length=255,
     )
     descricao = models.TextField(
         verbose_name="Descrição da contestação",

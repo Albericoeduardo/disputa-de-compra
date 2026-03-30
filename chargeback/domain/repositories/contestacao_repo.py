@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from chargeback.chargeback.infra.persistence.models.contestacao import Contestacao
+from chargeback.chargeback.infra.models.contestacao import Contestacao
 
 
 class AbcstractContestacaoRepo(ABC):
@@ -10,5 +10,5 @@ class AbcstractContestacaoRepo(ABC):
         pass
 
     @abstractmethod
-    def buscar_por_id_transacao_tipo_contestacao(self, id_transacao: int, tipo_contestacao: int) -> Contestacao:
+    def buscar_por_token_transacao_tipo_contestacao(self, token_transacao: str, tipo_contestacao: int) -> Contestacao:
         pass
