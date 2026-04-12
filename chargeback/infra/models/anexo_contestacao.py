@@ -1,7 +1,7 @@
 from django.db import models
 
 from chargeback.chargeback.domain.constantes import TIPO_ANEXOS
-from chargeback.chargeback.infra.persistence.models.contestacao import Contestacao
+from chargeback.chargeback.infra.models.contestacao import Contestacao
 
 
 class AnexoContestacao(models.Model):

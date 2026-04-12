@@ -1,10 +1,10 @@
 from django.db import models
 
 from chargeback.chargeback.domain.constantes import STATUS_CONTESTACAO
-from chargeback.chargeback.infra.persistence.models.contestacao import Contestacao
+from chargeback.chargeback.infra.models.contestacao import Contestacao
 
 
-class HistoricoContestacoes(models.Model):
+class HistoricoContestacao(models.Model):
     contestacao = models.ForeignKey(
         Contestacao,
         on_delete=models.CASCADE,
@@ -24,5 +24,5 @@ class HistoricoContestacoes(models.Model):
         return f"Contestação de {self.contestacao.cliente.nome} em {self.nome}"
     
     class Meta:
-        verbose_name = "Histórico de Contestação"
-        verbose_name_plural = "Históricos de Contestação"
+        verbose_name = "Histórico da Contestação"
+        verbose_name_plural = "Histórico das Contestações"
