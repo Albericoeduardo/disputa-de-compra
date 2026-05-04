@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Cliente(models.Model):
+class ClienteModel(models.Model):
     nome = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     cpf = models.CharField(max_length=14, unique=True)

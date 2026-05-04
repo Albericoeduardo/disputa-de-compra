@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from chargeback.chargeback.aplication.cliente_serializer import ClienteSerializer
+from chargeback.aplication.serializers.cliente_serializer import ClienteSerializer
 
 
 class ContestacaoViewSerializer(serializers.Serializer):

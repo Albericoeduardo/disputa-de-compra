@@ -1,27 +1,31 @@
 from django.db import models
 
-from chargeback.chargeback.domain.constantes import TIPO_ANEXOS
-from chargeback.chargeback.infra.models.contestacao import Contestacao
+from chargeback.domain.value_objects.tipo_anexo import TIPO_ANEXOS
+from chargeback.infra.models.contestacao_model import ContestacaoModel
 
 
-class AnexoContestacao(models.Model):
+class AnexoContestacaoModel(models.Model):
     contestacao = models.ForeignKey(
-        Contestacao,
+        ContestacaoModel,
         on_delete=models.CASCADE,
     )
     tipo = models.SmallIntegerField(
         verbose_name="Tipo do anexo",
         choices=TIPO_ANEXOS,
     )
-    url = models.URLField(
-        verbose_name="URL do anexo",
-        max_length=255,
-    )
     observacao = models.TextField(
         verbose_name="Observação",
         max_length=255,
         blank=True,
         null=True,
+    )
+    nome_arquivo = models.CharField(
+        verbose_name="Nome do arquivo",
+        max_length=255,
+    )
+    url = models.URLField(
+        verbose_name="URL do anexo",
+        max_length=255,
     )
 
     class Meta:
