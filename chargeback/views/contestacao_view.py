@@ -2,13 +2,9 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 
-from chargeback.chargeback.aplication.contestacao_serializer import (
-    ContestacaoViewSerializer,
-)
-from chargeback.chargeback.domain.casos_de_uso.contestacao_caso_de_uso import (
-    AbrirContestacaoCasoDeUso,
-)
-from chargeback.chargeback.infra.models.contestacao import Contestacao
+from chargeback.aplication.serializers.contestacao_serializer import ContestacaoViewSerializer
+from chargeback.aplication.casos_de_uso.abrir_contestacao_caso_de_uso import AbrirContestacaoCasoDeUso
+from chargeback.domain.entities.contestacao import Contestacao
 
 
 class CriarContestacaoView(APIView):

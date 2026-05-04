@@ -1,12 +1,12 @@
 from django.db import models
 
-from chargeback.chargeback.domain.constantes import STATUS_CONTESTACAO
-from chargeback.chargeback.infra.models.contestacao import Contestacao
+from chargeback.domain.value_objects.status_contestacao import STATUS_CONTESTACAO
+from chargeback.infra.models.contestacao_model import ContestacaoModel
 
 
-class HistoricoContestacao(models.Model):
+class HistoricoContestacaoModel(models.Model):
     contestacao = models.ForeignKey(
-        Contestacao,
+        ContestacaoModel,
         on_delete=models.CASCADE,
     )
     nome = models.SmallIntegerField(

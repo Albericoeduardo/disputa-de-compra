@@ -1,14 +1,11 @@
 from django.db import models
 
-from chargeback.chargeback.domain.constantes import (
-    STATUS_CONTESTACAO,
-    TIPO_CONTESTACAO,
-    EnumStatusContestacao,
-)
-from chargeback.chargeback.infra.models.cliente import Cliente
+from chargeback.domain.value_objects.status_contestacao import STATUS_CONTESTACAO, EnumStatusContestacao
+from chargeback.domain.value_objects.tipo_contestacao import TIPO_CONTESTACAO
+from chargeback.infra.models.cliente_model import ClienteModel
 
 
-class Contestacao(models.Model):
+class ContestacaoModel(models.Model):
     tipo = models.SmallIntegerField(
         choices=[TIPO_CONTESTACAO],
     )
@@ -22,7 +19,7 @@ class Contestacao(models.Model):
         default=EnumStatusContestacao.ABERTO,
     )
     cliente = models.ForeignKey(
-        Cliente,
+        ClienteModel,
         on_delete=models.CASCADE,
     )
     produto = models.CharField(

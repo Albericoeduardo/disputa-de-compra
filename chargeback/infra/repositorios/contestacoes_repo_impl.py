@@ -1,14 +1,13 @@
-from chargeback.chargeback.domain.aggregates.contestacao_aggr import ContestacaoAggregate
-from chargeback.chargeback.domain.repositories.contestacao_repo import (
-    AbcstractContestacaoRepo,
-)
-from chargeback.chargeback.infra.models.contestacao import Contestacao
+from chargeback.domain.entities.contestacao import Contestacao
+from chargeback.domain.repositories.icontestacao_repo import IContestacaoRepository
+from chargeback.domain.value_objects.status_contestacao import EnumStatusContestacao
+from chargeback.infra.models.contestacao_model import ContestacaoModel
 
 
-class ContestacaoRepo(AbcstractContestacaoRepo):
+class ContestacaoRepo(IContestacaoRepository):
 
-    def salvar(self, contestacao) -> None:
-        model = Contestacao.objects.create(
+    def salvar(self, contestacao: Contestacao):
+        model = ContestacaoModel.objects.create(
             tipo=contestacao.tipo,
             token_transacao=contestacao.token_transacao,
             cliente=contestacao.cliente,
@@ -25,12 +24,13 @@ class ContestacaoRepo(AbcstractContestacaoRepo):
         tipo_contestacao: int
     ) -> Contestacao:
         try:
-            model = Contestacao.objects.get(
+            model = ContestacaoModel.objects.get(
                 token_transacao=token_transacao,
                 tipo=tipo_contestacao,
+                status=EnumStatusContestacao.ABERTO,
                 ativo=True,
             )
-            return ContestacaoAggregate(
+            return Contestacao(
                 id=model.id,
                 tipo=model.tipo,
                 token_transacao=model.token_transacao,
@@ -40,5 +40,5 @@ class ContestacaoRepo(AbcstractContestacaoRepo):
                 bandeira=model.bandeira,
                 produto=model.produto,
             )
-        except Contestacao.DoesNotExist:
+        except ContestacaoModel.DoesNotExist:
             return None
