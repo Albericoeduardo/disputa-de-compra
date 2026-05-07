@@ -27,6 +27,7 @@ class AnexoContestacaoModel(models.Model):
         verbose_name="URL do anexo",
         max_length=255,
     )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Anexo de Contestação"

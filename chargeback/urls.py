@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from chargeback.views.anexar_documentos import AnexarDocumentosView
+from chargeback.views.contestacao_view import ContestacaoCollectionView, ContestacaoDetailView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('contestacoes/', ContestacaoCollectionView.as_view(), name='contestacao-collection'),
+    path('contestacoes/<int:contestacao_id>/', ContestacaoDetailView.as_view(), name='contestacao-detail'),
+    path('contestacoes/<int:contestacao_id>/anexos/', AnexarDocumentosView.as_view(), name='contestacao-anexos'),
 ]

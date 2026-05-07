@@ -2,7 +2,10 @@ from chargeback.domain.repositories.icontestacao_repo import IContestacaoReposit
 
 
 class ContestacaoService:
-    def __init__(self, contestacao_repo: IContestacaoRepository):
+    def __init__(
+        self,
+        contestacao_repo: IContestacaoRepository,
+    ):
         self.contestacao_repo = contestacao_repo
 
     def pode_abrir_contestacao(
@@ -14,9 +17,8 @@ class ContestacaoService:
         Valida se é possível abrir uma contestação.
 
         Regra de negócio: Não pode haver contestação do mesmo tipo
-        aberta para o mesmo cliente e token_transacao.
+        para a mesma transação.
 
-        :param cliente_id: ID do cliente
         :param tipo: Tipo da contestação
         :param token_transacao: Token da transação
         :return: Tuple indicando se é possível abrir a contestação e mensagem explicativa
@@ -27,6 +29,7 @@ class ContestacaoService:
         )
 
         if contestacao_existente:
-            return False, f"Já existe uma contestação em aberto desse tipo: {tipo} para esta transação"
+            return False, f"Já existe uma contestação desse tipo: {tipo} para esta transação"
 
         return True, "OK"
+
