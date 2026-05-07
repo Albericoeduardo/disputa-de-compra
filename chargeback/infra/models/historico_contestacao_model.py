@@ -9,8 +9,8 @@ class HistoricoContestacaoModel(models.Model):
         ContestacaoModel,
         on_delete=models.CASCADE,
     )
-    nome = models.SmallIntegerField(
-        verbose_name="Nome do status",
+    status = models.SmallIntegerField(
+        verbose_name="Status da contestacao",
         choices=STATUS_CONTESTACAO,
     )
     observacao = models.TextField(
@@ -19,9 +19,15 @@ class HistoricoContestacaoModel(models.Model):
         blank=True,
         null=True,
     )
+    data_limite = models.DateTimeField(
+        verbose_name="Data limite da etapa",
+        blank=True,
+        null=True,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Contestação de {self.contestacao.cliente.nome} em {self.nome}"
+        return f"Contestacao de {self.contestacao.cliente.nome} em {self.status}"
     
     class Meta:
         verbose_name = "Histórico da Contestação"

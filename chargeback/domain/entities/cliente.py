@@ -4,9 +4,11 @@ class Cliente:
             nome: str,
             email: str,
             cpf: str,
-            telefone: str,
+            telefone: str | None,
+            id: int | None = None,
             ativo: bool = True,
         ):
+        self.id = id
         self.nome = nome
         self.email = email
         self.cpf = cpf
